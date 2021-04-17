@@ -32,6 +32,21 @@ There are **3 scripts** that will ease our job to create our data warehouse infr
 ```sh
 python aws_create_cluster.py
 ```
+--- Console Output ---
+Parsing the config file...
+1.1 Creating a new IAM Role
+1.2 Attaching Policy
+2. Starting redshift cluster creation
+Redshift cluster creation http response status code: 
+200
+The cluster is being created.
+
+** Note **
+- Ensure that [AWS] KEY, SECRET values are not in 'dwh.cfg' before pushing to remote git. Otherwise, AWS will apply the "AWSCompromisedKeyQuarantine" AWS Managed Policy ("Quarantine Policy") to the IAM User - in our case, DB_USER=dwhuser.
+- If the above has happened, remove KEY, SECRET values from 'dwh.cfg'
+- Then go to AWS console->IAM->Users->dwhuser->
+- Delete "AWSCompromisedKeyQuarantine policy
+
 
 #### 2. Checking the cluster availability 
 
@@ -40,6 +55,9 @@ _This one you should run several times until your cluster becomes available - ta
 ```sh
 python aws_check_cluster_available.py
 ```
+
+--- Console Output ---
+
 
 #### 3. Destroying the cluster 
 
