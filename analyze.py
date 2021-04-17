@@ -12,9 +12,13 @@ def run_analytical_queries(cur):
     for query in analytical_queries:
         print("{}... ".format(analytical_query_titles[idx]))
         row = cur.execute(query)
-        print(row.total)
+        if row is not None:
+            print(row.total)
+        else:
+            print("Row is NONE")
         idx = idx + 1
         print("  [DONE]  ")
+
 
 
 def main():

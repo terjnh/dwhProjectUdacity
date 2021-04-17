@@ -205,8 +205,9 @@ def aws_open_redshift_port(ec2, redshift):
     try:
         vpc = ec2.Vpc(id=cluster_props['VpcId'])
         all_security_groups = list(vpc.security_groups.all())
+        print("All security groups...")
         print(all_security_groups)
-        defaultSg = all_security_groups[1]
+        defaultSg = all_security_groups[0]
         print(defaultSg)
 
         defaultSg.authorize_ingress(

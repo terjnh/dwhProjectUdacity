@@ -12,13 +12,13 @@ DWH_IAM_ROLE_ARN = config.get("IAM_ROLE", "ARN")
 
 # DROP TABLES
 
-staging_events_table_drop   = "DROP TABLE IF EXISTS staging_events;"
-staging_songs_table_drop    = "DROP TABLE IF EXISTS staging_songs;"
-songplay_table_drop         = "DROP TABLE IF EXISTS songplays;"
-user_table_drop             = "DROP TABLE IF EXISTS users;"
-song_table_drop             = "DROP TABLE IF EXISTS songs;"
-artist_table_drop           = "DROP TABLE IF EXISTS artists;"
-time_table_drop             = "DROP TABLE IF EXISTS time;"
+staging_events_table_drop = "DROP TABLE IF EXISTS staging_events;"
+staging_songs_table_drop = "DROP TABLE IF EXISTS staging_songs;"
+songplay_table_drop = "DROP TABLE IF EXISTS songplays;"
+user_table_drop = "DROP TABLE IF EXISTS users;"
+song_table_drop = "DROP TABLE IF EXISTS songs;"
+artist_table_drop = "DROP TABLE IF EXISTS artists;"
+time_table_drop = "DROP TABLE IF EXISTS time;"
 
 # CREATE TABLES
 
@@ -235,11 +235,11 @@ time_table_insert = ("""
 
 
 analytical_queries = [
-    'SELECT COUNT(*) AS total FROM songplays',
-    'SELECT COUNT(*) AS total FROM users',
-    'SELECT COUNT(*) AS total FROM songs',
     'SELECT COUNT(*) AS total FROM artists',
-    'SELECT COUNT(*) AS total FROM time'
+    'SELECT COUNT(*) AS total FROM songs',
+    'SELECT COUNT(*) AS total FROM time',
+    'SELECT COUNT(*) AS total FROM users',
+    'SELECT COUNT(*) AS total FROM songplays'
 ]
 analytical_query_titles = [
     'Artists table count',
@@ -253,16 +253,16 @@ analytical_query_titles = [
 # QUERY LISTS
 
 create_table_queries = [
-    staging_events_table_create, 
-    staging_songs_table_create, 
-    songplay_table_create, 
-    user_table_create, 
-    song_table_create, 
-    artist_table_create, 
-    time_table_create
+    staging_events_table_create,
+    staging_songs_table_create,
+    time_table_create,
+    user_table_create,
+    artist_table_create,
+    song_table_create,
+    songplay_table_create
 ]
 drop_table_queries = [staging_events_table_drop, staging_songs_table_drop, songplay_table_drop, user_table_drop, song_table_drop, artist_table_drop, time_table_drop]
 copy_table_order = ['staging_events', 'staging_songs']
 copy_table_queries = [staging_events_copy, staging_songs_copy]
-insert_table_order = ['songplays', 'users', 'songs', 'artists', 'time']
-insert_table_queries = [songplay_table_insert, user_table_insert, song_table_insert, artist_table_insert, time_table_insert]
+insert_table_order = ['artists', 'songs', 'time', 'users', 'songplays']
+insert_table_queries = [artist_table_insert, song_table_insert, time_table_insert, user_table_insert, songplay_table_insert]

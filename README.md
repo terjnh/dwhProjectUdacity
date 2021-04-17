@@ -57,6 +57,12 @@ python aws_check_cluster_available.py
 ```
 
 --- Console Output ---
+Parsing the config file...
+cluster available!
+Writing the cluster address and IamRoleArn to the config file...
+Parsing the config file...
+[ec2.SecurityGroup(id='sg-c09b1db4')]
+list index out of range
 
 
 #### 3. Destroying the cluster 
@@ -75,6 +81,25 @@ It consists of these two simple python scripts:
  - `python etl.py` - This script does two principal tasks:
      - Copy (load) the logs from the dataset's S3 bucket to the staging tables;
      - Translate all data from the staging tables to the analytical tables with `INSERT ... SELECT` statements.
+
+--- Console Output (execute etl.py) ---
+Copying data into staging_events...
+  [DONE]  
+Copying data into staging_songs...
+  [DONE]  
+Inserting data into artists...
+  [DONE]  
+Inserting data into songs...
+  [DONE]  
+Inserting data into time...
+  [DONE]  
+Inserting data into users...
+  [DONE]  
+Inserting data into songplays...
+  [DONE]  
+
+
+
 
 ## Analyzing the results
 
